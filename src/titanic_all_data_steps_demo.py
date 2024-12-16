@@ -55,5 +55,5 @@ print(data_frame)
 # df['Sex'] = df['Sex'].map({'male': 1, 'female': 0})
 # df = pd.get_dummies(df, columns=['Embarked'])
 
-# # Displaying the cleaned and prepared DataFrame
+# # Displaying the cleaned and prepared DataFrame1
 # print(df.head())
