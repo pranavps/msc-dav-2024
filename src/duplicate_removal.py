@@ -7,14 +7,7 @@ data = {'Name': ['John', 'Anna', 'John', 'Mike'],
 
 df = pd.DataFrame(data)
 
-#identifying duplicates
-duplicates = df[df.duplicated(keep=False)]
-
 # Removing duplicates
-df_cleaned = df.drop_duplicates()
+df = df.drop_duplicates()
 
-dropped_duplicates = duplicates[~duplicates.index.isin(df_cleaned.index)]
-print(dropped_duplicates)
-
-# print(duplicates)
-# print(df_cleaned)
+print(df)
