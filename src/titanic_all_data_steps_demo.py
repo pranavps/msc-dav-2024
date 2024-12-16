@@ -14,8 +14,9 @@ import pandas as pd
 # Step 1: Load the dataset
 # You need to download the dataset from Kaggle and place it in your working directory
 
-# data_frame = pd.read_csv( r'C:\Users\prana\msc-dav-2024\data\Automobile_data.csv')
-data_frame = pd.read_csv( r'C:\Users\prana\msc-dav-2024\data\titanic.csv')
+# Creating a dataframe from CSV read function
+data_frame = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'titanic.csv'))
+
 
 
 # Lets check the dropped data also
