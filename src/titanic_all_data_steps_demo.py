@@ -7,6 +7,7 @@
 # print("Path to dataset files:", path)
 
 # ================
+import os
 
 import pandas as pd
 # from sklearn.preprocessing import MinMaxScaler, StandardScaler
@@ -15,7 +16,7 @@ import pandas as pd
 # You need to download the dataset from Kaggle and place it in your working directory
 
 # data_frame = pd.read_csv( r'C:\Users\prana\msc-dav-2024\data\Automobile_data.csv')
-data_frame = pd.read_csv( r'C:\Users\prana\msc-dav-2024\data\titanic.csv')
+data_frame = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'titanic.csv'))
 
 
 # Lets check the dropped data also
@@ -30,14 +31,20 @@ print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n\n")
 
 print(data_frame)
 
-# # Step 3: Handle missing values
-# # For simplicity, we'll fill missing age values with the median age and drop rows with other missing values
-# df['Age'].fillna(df['Age'].median(), inplace=True)
-# df = df.dropna(subset=['Embarked', 'Fare'])  # Dropping rows with missing 'Embarked' and 'Fare' values
+# Step 3: Handle missing values
+# For simplicity, we'll fill missing age values with the median age and drop rows with other missing values
+# data_frame['Age'].fillna(data_frame['Age'].median(), inplace=True)
+data_frame['Age'] = data_frame['Age'].fillna(data_frame['Age'].median())
 
-# # Step 4: Correct errors
-# # In the Titanic dataset, there might not be blatant errors, but ensure correct data types
-# df['Fare'] = pd.to_numeric(df['Fare'], errors='coerce')
+data_frame = data_frame.dropna(subset=['Embarked', 'Fare'])  # Dropping rows with missing 'Embarked' and 'Fare' values
+print("=========")
+print(data_frame)
+
+# Step 4: Correct errors
+# In the Titanic dataset, there might not be blatant errors, but ensure correct data types
+data_frame['Fare'] = pd.to_numeric(data_frame['Fare'], errors='coerce')
+print("=========")
+print(data_frame)
 
 # # Step 5: Normalize data
 # scaler = MinMaxScaler()
