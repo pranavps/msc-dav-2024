@@ -36,6 +36,6 @@ df['Fare'] = pd.to_numeric(df['Fare'], errors='coerce')
 # Encoding 'Sex' and 'Embarked' columns
 df['Sex'] = df['Sex'].map({'male': 1, 'female': 0})
 df = pd.get_dummies(df, columns=['Embarked'])
-
+ 
 # Displaying the cleaned and prepared DataFrame
 print(df.head())
