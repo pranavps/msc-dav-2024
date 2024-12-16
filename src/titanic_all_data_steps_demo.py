@@ -1,18 +1,21 @@
 # The program to demonstrate how to preprocess and clean a dataset using the steps from the Titanic dataset.
-import kagglehub
+# import kagglehub
 
-# Download latest version
-path = kagglehub.dataset_download("heptapod/titanic")
+# # Download latest version
+# path = kagglehub.dataset_download("heptapod/titanic")
 
-print("Path to dataset files:", path)
+# print("Path to dataset files:", path)
 # ================
 import pandas as pd
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
+# from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 # Step 1: Load the dataset
 # You need to download the dataset from Kaggle and place it in your working directory
-df = pd.read_csv(path + '\\titanic.csv')
+df = pd.read_csv(r'.\data\titanic.csv')
 
+#dropped data
+duplicates = df[df.duplicated()]
+print(duplicates)
 # Step 2: Remove duplicates
 df = df.drop_duplicates()
 
@@ -26,8 +29,8 @@ df = df.dropna(subset=['Embarked', 'Fare'])  # Dropping rows with missing 'Embar
 df['Fare'] = pd.to_numeric(df['Fare'], errors='coerce')
 
 # Step 5: Normalize data
-scaler = MinMaxScaler()
-df['Fare'] = scaler.fit_transform(df[['Fare']])
+# scaler = MinMaxScaler()
+# df['Fare'] = scaler.fit_transform(df[['Fare']])
 
 # Step 6: Transform and encode data
 # Encoding 'Sex' and 'Embarked' columns
