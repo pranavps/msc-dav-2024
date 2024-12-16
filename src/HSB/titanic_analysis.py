@@ -12,3 +12,4 @@ print(data_frame.drop_duplicates())
 data_frame['Sex']=data_frame['Sex'].map(lambda x : "Male" if x == 0 else "Female")
 print(data_frame.head())
 #code end
+#new comment
