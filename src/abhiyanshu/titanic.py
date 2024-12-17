@@ -5,7 +5,7 @@ import pandas as pd
 # path = kagglehub.dataset_download("heptapod/titanic")
 
 # print("Path to dataset files:", path)
-data_frame=pd.read_csv(r'..\data\titanic.csv')
+data_frame=pd.read_csv(r'.\data\titanic.csv')
 duplicates=data_frame[data_frame.duplicated()]
 print(duplicates)
 print(data_frame.drop_duplicates())
