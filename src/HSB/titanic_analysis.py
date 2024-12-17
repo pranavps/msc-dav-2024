@@ -1,3 +1,23 @@
+"""
+================================================================================
+Filename    : titanic_analysis.py
+Author      : Harjas Singh Bajwa
+Email       : hab2442007@sicsr.ac.in
+Created     : 2024-12-16
+Description : Doing analysis on Titanic Sample Dataset
+--------------------------------------------------------------------------------
+Usage       : <Specify usage or commands if applicable>
+Dependencies: kaaglehub,pandas,numpy
+--------------------------------------------------------------------------------
+Version History:
+    2024-12-17 - Version 1.0 - Initial version.
+--------------------------------------------------------------------------------
+License     : Na
+================================================================================
+"""
+
+
+
 import kagglehub
 import pandas as pd
 import numpy as np
