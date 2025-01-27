@@ -1,4 +1,8 @@
-# The program to demonstrate how to preprocess and clean a dataset using the steps from the Titanic dataset.
+# titanic_all_data_steps_demo.py: This is a Python program that demonstrates how to preprocess and clean a dataset using the steps from the Titanic dataset.
+# Author: Pranav Sahasrabudhe
+# Email: pranav.sahasrabudhe@gmail.com
+# (C)0 2024 - 2025 Pranav Sahasrabudhe)
+
 # import kagglehub
 
 # # Download latest version
@@ -10,14 +14,14 @@
 import os
 
 import pandas as pd
-# from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 # Step 1: Load the dataset
 # You need to download the dataset from Kaggle and place it in your working directory
 
 
 # data_frame = pd.read_csv( r'C:\Users\prana\msc-dav-2024\data\Automobile_data.csv')
-data_frame = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'titanic.csv'))
+data_frame = pd.read_csv(os.path.join(os.path.dirname(__file__), '..\\data', 'titanic.csv'))
 
 
 
@@ -45,20 +49,33 @@ print(data_frame)
 # Step 4: Correct errors
 # In the Titanic dataset, there might not be blatant errors, but ensure correct data types
 data_frame['Fare'] = pd.to_numeric(data_frame['Fare'], errors='coerce')
-print("=========")
+print("==== Fare Data Frame TO Numeric =====")
 print(data_frame)
 
-# # Step 5: Normalize data
-# scaler = MinMaxScaler()
-# df['Fare'] = scaler.fit_transform(df[['Fare']])
+# Step 5: Normalize data
+scaler = MinMaxScaler()
+data_frame['Fare'] = scaler.fit_transform(data_frame[['Fare']])
+print("==== Normalized Fare Data Frame =====")
+print(data_frame)
 
-# # Step 6: Transform and encode data
-# # Encoding 'Sex' and 'Embarked' columns
-# df['Sex'] = df['Sex'].map({'male': 1, 'female': 0})
-# df = pd.get_dummies(df, columns=['Embarked'])
+data_frame['Age'] = scaler.fit_transform(data_frame[['Age']])
+print("==== Normalized Age Data Frame =====")
+print(data_frame)
 
+<<<<<<< HEAD
 
 #  Displaying the cleaned and prepared DataFrame1
 # print(df.head())
 
 
+=======
+# Step 6: Transform and encode data
+# Encoding 'Sex' and 'Embarked' columns
+data_frame['Sex'] = data_frame['Sex'].map({'male': 1, 'female': 0})
+data_frame = pd.get_dummies(data_frame, columns=['Embarked'])
+
+# Displaying the cleaned and prepared DataFrame1
+print(data_frame.head())
+print("---------------")
+print(data_frame.tail())
+>>>>>>> 973bb1a07db2e215d20ecc1ef517b390ef6941b7
