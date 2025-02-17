@@ -21,6 +21,6 @@ print("\nDropped Data:\n", dropped_data)
 
 # Removing duplicates
 data_frame = data_frame.drop_duplicates()
-
+print("----------------")
 print(data_frame)
 
