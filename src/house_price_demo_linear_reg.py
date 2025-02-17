@@ -1,6 +1,6 @@
 '''
 Summary
-Loading the Data: We loaded the Boston Housing dataset.
+Loading the Data: We loaded the California Housing dataset.
 
 EDA: We explored the data and plotted the distribution of house prices.
 
@@ -21,52 +21,34 @@ from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
+import numpy as np
 
 # Loading the dataset
-import pandas as pd
 from sklearn.datasets import fetch_california_housing
+# Creating a synthetic dataset
+np.random.seed(42)  # For reproducibility
+house_size = np.random.randint(1000, 4000, 100)  # House sizes in square feet
+house_price = 150 + 50 * (house_size / 1000) + np.random.normal(0, 25, 100)  # House prices in $1000s
 
-# Loading the dataset
-california = fetch_california_housing()
-df = pd.DataFrame(california.data, columns=california.feature_names)
-# MedHouseVal is the target variable (median house value)
-df['MedHouseVal'] = california.target
+# Creating a DataFrame
+data = pd.DataFrame({
+    'HouseSize': house_size,
+    'HousePrice': house_price
+})
 
-print(df.head())
+print(data.head())
 
-# -----------
-
-
-# Plotting the distribution of the target variable
-sns.histplot(df['MedHouseVal'], kde=True)
-plt.title('Distribution of House Prices')
-plt.xlabel('Median Value (in $100,000s)')
-plt.ylabel('Frequency')
+# Exploring the data
+plt.scatter(data['HouseSize'], data['HousePrice'])
+plt.title('House Size vs House Price')
+plt.xlabel('House Size (sq ft)')
+plt.ylabel('House Price ($1000s)')
 plt.show()
 
+X = data[['HouseSize']]  # Predictor (independent variable)
+y = data['HousePrice']  # Target (dependent variable)
 
-# -----------
-
-
-# Checking for missing values
-print(df.isnull().sum())
-
-# Scaling the features
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(df.drop('MedHouseVal', axis=1))
-
-# Defining the features (X) and target variable (y)
-X = pd.DataFrame(X_scaled, columns=california.feature_names)
-y = df['MedHouseVal']
-
-
-# Splitting the data -----------------------
-
-# Splitting the data
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42)
-
-# -----------------------------------------
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Creating and training the model
 model = LinearRegression()
@@ -76,10 +58,8 @@ model.fit(X_train, y_train)
 coefficients = model.coef_
 intercept = model.intercept_
 
-print(f'Coefficients: {coefficients}')
+print(f'Coefficient: {coefficients[0]}')
 print(f'Intercept: {intercept}')
-
-# ---------------------------
 
 # Making predictions on the test data
 y_pred = model.predict(X_test)
@@ -93,24 +73,16 @@ print(f'MAE: {mae}')
 print(f'MSE: {mse}')
 print(f'R-squared: {r2}')
 
-# ---------------------------
-# Creating a DataFrame for new data points
-new_data = pd.DataFrame({
-    'MedInc': [8.3252], 'HouseAge': [41.0], 'AveRooms': [6.9841], 'AveBedrms': [1.0238],
-    'Population': [322.0], 'AveOccup': [2.5556], 'Latitude': [37.88], 'Longitude': [-122.23]
-})
+# Plotting the predictions
+plt.scatter(X_test, y_test, color='blue', label='Actual Prices')
+plt.plot(X_test, y_pred, color='red', linewidth=2, label='Predicted Prices')
+plt.title('House Size vs House Price (Test Data)')
+plt.xlabel('House Size (sq ft)')
+plt.ylabel('House Price ($1000s)')
+plt.legend()
+plt.show()
 
-# Scaling the new data
-new_data_scaled = scaler.transform(new_data)
-
-# Making predictions
-predicted_price = model.predict(new_data_scaled)
-print(f'Predicted House Price: ${predicted_price[0] * 100000:.2f}')
-
-
-# # Plotting the regression line
-# plt.scatter(df['MedHouseVal'], df['MedInc'])
-# plt.plot(df['MedHouseVal'], model.predict(X), color='red')
-# plt.xlabel('Median House Value')
-# plt.ylabel('Median Income')
-# plt.show()
+# Predicting the price of a new house
+new_house_size = pd.DataFrame({'HouseSize': [2500]})
+predicted_price = model.predict(new_house_size)
+print(f'Predicted House Price for 2500 sq ft: ${predicted_price[0] * 1000:.2f}')

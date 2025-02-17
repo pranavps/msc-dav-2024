@@ -109,3 +109,18 @@ predicted_price = model.predict(new_data_scaled)
 print(f'Predicted House Price: ${predicted_price[0] * 100000:.2f}')
 
 # --------
+
+# # Lets create a covariace matrix
+# cov_matrix = pd.DataFrame(X.corr(), columns=california.feature_names)
+# sns.heatmap(cov_matrix, annot=True, cmap='coolwarm')
+# plt.title('Covariance Matrix Heatmap')
+# plt.show()
+
+# # Plotting the regression line on the scatter plot
+# plt.scatter(df['MedHouseVal'], df['MedInc'])
+# plt.plot(df['MedHouseVal'], model.predict(X), color='red')
+# plt.xlabel('Median House Value')
+# plt.ylabel('Median Income')
+# plt.show()
+
+# ----------
