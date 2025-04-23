@@ -62,6 +62,13 @@ data_frame['Age'] = scaler.fit_transform(data_frame[['Age']])
 print("==== Normalized Age Data Frame =====")
 print(data_frame)
 
+<<<<<<< HEAD
+
+#  Displaying the cleaned and prepared DataFrame1
+# print(df.head())
+
+
+=======
 # Step 6: Transform and encode data
 # Encoding 'Sex' and 'Embarked' columns
 data_frame['Sex'] = data_frame['Sex'].map({'male': 1, 'female': 0})
@@ -71,3 +78,4 @@ data_frame = pd.get_dummies(data_frame, columns=['Embarked'])
 print(data_frame.head())
 print("---------------")
 print(data_frame.tail())
+>>>>>>> 973bb1a07db2e215d20ecc1ef517b390ef6941b7
